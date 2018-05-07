@@ -58,8 +58,9 @@ contract VulnerableOne {
 	function remove_user(address _remove_user) public {
 		require(users_map[msg.sender].created != 0);
 		delete(users_map[_remove_user]);
-		// [HINT] [SEVERE] loop can be out of gaz for seeking and copying addresses of asers
 		bool shift = false;
+		// [HINT] [SEVERE] loop can be out of gaz for seeking and copying addresses of asers
+		// [HINT] [SEVERE] in the end of loop last element will be doubled, forgotten remove of it
 		for (uint i=0; i<users_list.length; i++) {
 			if (users_list[i] == _remove_user) {
 				shift = true;
